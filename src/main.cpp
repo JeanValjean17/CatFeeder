@@ -1,5 +1,8 @@
 #include "main.h"
 #include "usart.h"
+#include "ili9341_gfx.h"
+#include "ili9341_stm32_driver.h"
+#include "snow_tiger.h"
 
 SPI_HandleTypeDef hspi2;
 DMA_HandleTypeDef hdma_spi2_tx;
@@ -10,14 +13,32 @@ int main(void)
     HAL_Init();
     SystemClock_Config();
     MX_GPIO_Init();
+    MX_DMA_Init();
+    MX_SPI2_Init();
     Drivers::Usart usart(&huart1);
+    ILI9341_Init();
 
     while (1)
     {
-        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+        /*HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
         HAL_Delay(500);
         HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-        HAL_Delay(500);
+        HAL_Delay(500);*/
+        ILI9341_FillScreen(WHITE);
+        ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+        ILI9341_DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
+        HAL_Delay(2000);
+        ILI9341_FillScreen(WHITE);
+
+        /* IMAGE EXAMPLE */
+        ILI9341_FillScreen(WHITE);
+        ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+        ILI9341_DrawText("RGB Picture", FONT3, 10, 10, RED, YELLOW);
+        ILI9341_DrawText("TIGER", FONT3, 10, 30, BLACK, WHITE);
+        HAL_Delay(2000);
+        ILI9341_DrawImage(snow_tiger, SCREEN_VERTICAL_2);
+        ILI9341_SetRotation(SCREEN_VERTICAL_1);
+        HAL_Delay(5000);
         // lcdDriver.DrawSomething();
         usart.PrintBlocking("Value of One in number is  : %f \r\n", 1.3);
     }
@@ -68,7 +89,7 @@ void SystemClock_Config(void)
     }
 }
 
-static void MX_SPI2_Init(void)
+void MX_SPI2_Init(void)
 {
 
     /* USER CODE BEGIN SPI2_Init 0 */
@@ -148,19 +169,18 @@ void MX_GPIO_Init(void)
 }
 
 /**
-  * Enable DMA controller clock
-  */
-static void MX_DMA_Init(void)
+ * Enable DMA controller clock
+ */
+void MX_DMA_Init(void)
 {
 
-  /* DMA controller clock enable */
-  __HAL_RCC_DMA1_CLK_ENABLE();
+    /* DMA controller clock enable */
+    __HAL_RCC_DMA1_CLK_ENABLE();
 
-  /* DMA interrupt init */
-  /* DMA1_Channel4_5_6_7_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Channel4_5_6_7_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Channel4_5_6_7_IRQn);
-
+    /* DMA interrupt init */
+    /* DMA1_Channel4_5_6_7_IRQn interrupt configuration */
+    HAL_NVIC_SetPriority(DMA1_Channel4_5_6_7_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Channel4_5_6_7_IRQn);
 }
 
 /**

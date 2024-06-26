@@ -39,13 +39,12 @@ INCDIRS =  \
 	.  \
 	./drivers/cmsis \
 	./drivers/st \
-	./src/Display/ili9341 \
+	./inc/display \
 	./inc \
 
 SOURCEDIRS =  \
 	./src \
-	./src/Display/ili9341 \
-	./src/Display/App \
+	./src/display \
 	./drivers/st \
 
 
@@ -96,8 +95,8 @@ LDFLAGS = $(MCU) -specs=nano.specs -T $(LDSCRIPT) $(LIBS) -Wl,-Map=$(BUILD_DIR)/
 $(OBJ_DIR)/%.o: src/%.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $^
 
-$(OBJ_DIR)/%.o: src/Display/ili9341/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c -o $@ $^
+#$(OBJ_DIR)/%.o: src/Display/ili9341/%.cpp | $(OBJ_DIR)
+#	$(CXX) $(CXXFLAGS) -c -o $@ $^
 
 
 
@@ -110,7 +109,7 @@ $(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 $(OBJ_DIR)/%.o: drivers/st/%.c | $(OBJ_DIR)/main.o
 	$(CC) $(CFLAGS) -std=c17 -c -o $@ $^
 
-$(OBJ_DIR)/%.o: src/Display/App/%.c | $(OBJ_DIR)/main.o
+$(OBJ_DIR)/%.o: src/display/%.c | $(OBJ_DIR)/main.o
 	$(CC) $(CFLAGS) -std=c17 -c -o $@ $^
 
 

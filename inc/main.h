@@ -28,6 +28,8 @@ extern "C" {
 void SystemClock_Config(void);
 void Error_Handler(void);
 void MX_GPIO_Init(void);
+void MX_SPI2_Init(void);
+void MX_DMA_Init(void);
 
 #ifdef __cplusplus
 }
