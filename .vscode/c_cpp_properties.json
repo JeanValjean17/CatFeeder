@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "CrossARM",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "STM32L073xx",
+                "USE_HAL_DRIVER",
+                "DEBUG"
+            ],
+            "compilerPath": "C:/gnu-arm/10 2021.10/bin/arm-none-eabi-gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}
