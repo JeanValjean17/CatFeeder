@@ -1,7 +1,5 @@
 #include "main.h"
 #include "usart.h"
-#include "ili9341_gfx.h"
-#include "ili9341_stm32_driver.h"
 #include "snow_tiger.h"
 #include "ili9341.h"
 #include "display_gfx.h"
