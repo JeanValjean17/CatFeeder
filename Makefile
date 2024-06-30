@@ -95,8 +95,8 @@ LDFLAGS = $(MCU) -specs=nano.specs -T $(LDSCRIPT) $(LIBS) -Wl,-Map=$(BUILD_DIR)/
 $(OBJ_DIR)/%.o: src/%.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $^
 
-#$(OBJ_DIR)/%.o: src/Display/ili9341/%.cpp | $(OBJ_DIR)
-#	$(CXX) $(CXXFLAGS) -c -o $@ $^
+$(OBJ_DIR)/%.o: src/display/%.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c -o $@ $^
 
 
 
