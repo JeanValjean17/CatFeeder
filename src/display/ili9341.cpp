@@ -3,13 +3,13 @@
 namespace LCDScreen
 {
    
-    Ili9341::Ili9341(Drivers::Usart *usart, SPI_HandleTypeDef *hspi2) : debug(usart), spi(hspi2)
+    Ili9341::Ili9341(SPI_HandleTypeDef *hspi2) : spi(hspi2)
     {
 
-        usart->PrintBlocking("Initializing screen driver\r\n");
+        //usart->PrintBlocking("Initializing screen driver\r\n");
 
         this->Initialization();
-        usart->PrintBlocking("FiNISHED Initializing screen driver\r\n");
+        //usart->PrintBlocking("FiNISHED Initializing screen driver\r\n");
     }
 
     void Ili9341::SetRotation(ScreenOrientation rot)

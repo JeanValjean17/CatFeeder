@@ -5,10 +5,11 @@
 namespace LCDScreen
 {
     __STATIC_INLINE void DelayUs(volatile uint32_t us)
-{
-	us *= (SystemCoreClock / 1000000);
-	while (us--);
-}
+    {
+        us *= (SystemCoreClock / 1000000);
+        while (us--)
+            ;
+    }
 
     DisplayGFX::DisplayGFX(Ili9341 *displayDriver) : driver(displayDriver)
     {
@@ -22,8 +23,7 @@ namespace LCDScreen
     {
         this->SetScreenOrientation(Horizontal2);
         driver->FillScreen(WHITE);
-        this->DrawFilledCircle(100, 100, 50, PINK);
-        HAL_Delay(2000);
+        this->DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
     }
 
 #pragma region Private Methods
@@ -162,7 +162,6 @@ namespace LCDScreen
         uint16_t X0True = 0;
         uint16_t Y0True = 0;
 
-
         negCalc = X1 - X0;
         if (negCalc < 0)
             negX = 1;
@@ -229,7 +228,7 @@ namespace LCDScreen
         }
     }
 
-    void DisplayGFX::DrawText(const int16_t *str, const uint8_t font[], uint16_t X, uint16_t Y, uint16_t color, uint16_t bgcolor)
+    void DisplayGFX::DrawText(const char *str, const uint8_t font[], uint16_t X, uint16_t Y, uint16_t color, uint16_t bgcolor)
     {
         uint8_t charWidth;         /* Width of character */
         uint8_t fOffset = font[0]; /* Offset of character */

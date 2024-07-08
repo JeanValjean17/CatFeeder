@@ -80,7 +80,7 @@ CXXFLAGS = $(CFLAGS) -std=c++17 -fno-rtti -fno-exceptions -fno-threadsafe-static
 # link script
 LDSCRIPT = STM32L073RZTX_FLASH.ld
 LIBS = -lc -lm -lnosys 
-LDFLAGS = $(MCU) -specs=nano.specs -T $(LDSCRIPT) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -Wl,--print-memory-usage -Wl,--start-group -lstdc++ -lsupc++ -Wl,--end-group  
+LDFLAGS = $(MCU) -specs=nano.specs -u _printf_float -T $(LDSCRIPT) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections -Wl,--print-memory-usage -Wl,--start-group -lstdc++ -lsupc++ -Wl,--end-group  
 
 ##All C++ files
 #$(OBJ_DIR)/main.o: src/main.cpp

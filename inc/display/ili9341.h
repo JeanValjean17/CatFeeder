@@ -122,7 +122,7 @@ namespace LCDScreen
     class Ili9341
     {
     public:
-        Ili9341(Drivers::Usart *usart, SPI_HandleTypeDef *hspi2);
+        Ili9341(SPI_HandleTypeDef *hspi2);
         ~Ili9341();
         void SetRotation(ScreenOrientation rot);
         void SetAddress(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);

@@ -3,13 +3,11 @@
 #include "snow_tiger.h"
 #include "ili9341.h"
 #include "display_gfx.h"
+#include "stdio.h"
 
 SPI_HandleTypeDef hspi2;
 DMA_HandleTypeDef hdma_spi2_tx;
 UART_HandleTypeDef huart1;
-
-
-
 
 
 int main(void)
@@ -20,22 +18,24 @@ int main(void)
     MX_DMA_Init();
     MX_SPI2_Init();
     Drivers::Usart usart(&huart1);
-    LCDScreen::Ili9341 screenDriver(&usart, &hspi2);
+    LCDScreen::Ili9341 screenDriver(&hspi2);
     LCDScreen::DisplayGFX display(&screenDriver);
-    //ILI9341_Init();
+    // ILI9341_Init();
 
     while (1)
     {
         display.RenderLoop();
-        //screenDriver.SetRotation(LCDScreen::ScreenOrientation::Horizontal2);
-        //screenDriver.FillScreen(WHITE);
-        //ILI9341_FillScreen(WHITE);
-        //ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
-        //screenDriver.DrawFilledCircle(100, 100, 50, OLIVE);
-        //ILI9341_DrawFilledCircle(100, 100, 50, RED);
-        //ILI9341_DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
-        //HAL_Delay(2000);
-        //ILI9341_FillScreen(WHITE);
+        printf("\n\r UART Printf Example %.2f: \n\r", 3.2);
+        HAL_Delay(500);
+        // screenDriver.SetRotation(LCDScreen::ScreenOrientation::Horizontal2);
+        // screenDriver.FillScreen(WHITE);
+        // ILI9341_FillScreen(WHITE);
+        // ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+        // screenDriver.DrawFilledCircle(100, 100, 50, OLIVE);
+        // ILI9341_DrawFilledCircle(100, 100, 50, RED);
+        // ILI9341_DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
+        // HAL_Delay(2000);
+        // ILI9341_FillScreen(WHITE);
 
         /* IMAGE EXAMPLE */
         /*ILI9341_FillScreen(WHITE);
@@ -47,7 +47,7 @@ int main(void)
         ILI9341_SetRotation(SCREEN_VERTICAL_1);
         HAL_Delay(5000);*/
         // lcdDriver.DrawSomething();
-        usart.PrintBlocking("Value of One in number is  : %f \r\n", 1.3);
+        // usart.PrintBlocking("Value of One in number is  : %f \r\n", 1.3);
     }
     return 0;
 }
