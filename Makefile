@@ -72,7 +72,7 @@ C_DEFS =  \
 DEPFLAGS=-MP -MD
 OPTIONS = -Wall -Wextra -Wpedantic -O0 -g3 -fdata-sections -ffunction-sections 
 CFLAGS = $(MCU) $(C_DEFS) $(foreach D, $(INCDIRS), -I$(D)) $(OPTIONS) $(DEPFLAGS)
-CXXFLAGS = $(CFLAGS) -std=c++17 -fno-rtti -fno-exceptions -fno-threadsafe-statics 
+CXXFLAGS = $(CFLAGS) -std=c++20 -fno-rtti -fno-exceptions -fno-threadsafe-statics 
 
 #######################################
 # LDFLAGS
