@@ -4,8 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "shell",
-            "label": "Build Project",
+            
+            "type": "Git Bash",
+            "label": "build",
             "command": "make",
             "group": {
                 "kind": "build",
@@ -13,7 +14,8 @@
             },
             "problemMatcher": {
                 "base": "$gcc"
-            }
+            },
+            "args": ["make"]
         },
         {
             "type": "shell",
@@ -23,6 +25,6 @@
             "problemMatcher": {
                 "base": "$gcc"
             }
-}
+        }
     ]
 }

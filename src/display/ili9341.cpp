@@ -2,19 +2,21 @@
 
 namespace LCDScreen
 {
-   
+
     Ili9341::Ili9341(SPI_HandleTypeDef *hspi2) : spi(hspi2)
     {
 
-        //usart->PrintBlocking("Initializing screen driver\r\n");
+        // usart->PrintBlocking("Initializing screen driver\r\n");
 
         this->Initialization();
-        //usart->PrintBlocking("FiNISHED Initializing screen driver\r\n");
+        // usart->PrintBlocking("FiNISHED Initializing screen driver\r\n");
     }
 
     void Ili9341::SetRotation(ScreenOrientation rot)
     {
         this->SelectCommand(Commands::MemoryAccessControl);
+        this->screenOrientation = rot;
+
         HAL_Delay(1);
 
         switch (rot)
@@ -36,9 +38,17 @@ namespace LCDScreen
         }
     }
 
+    ScreenOrientation Ili9341::GetRotation()
+    {
+        return this->screenOrientation;
+    }
+
     void Ili9341::FillScreen(uint16_t color)
     {
-        this->SetAddress(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        if (this->screenOrientation == ScreenOrientation::Horizontal || this->screenOrientation == ScreenOrientation::Horizontal2)        
+            this->SetAddress(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
+        else if (this->screenOrientation == ScreenOrientation::Vertical || this->screenOrientation == ScreenOrientation::Vertical2)
+            this->SetAddress(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         this->DrawColorBurst(color, SCREEN_WIDTH * SCREEN_HEIGHT);
     }
 

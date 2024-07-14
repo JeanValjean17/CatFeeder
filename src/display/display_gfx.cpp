@@ -22,16 +22,15 @@ namespace LCDScreen
     void DisplayGFX::RenderLoop()
     {
         this->SetScreenOrientation(Horizontal2);
-        driver->FillScreen(WHITE);
-        this->DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
+        driver->FillScreen(BLUE);
+        this->DrawText("Test Text", FONT2, 10, 10, BLACK, WHITE);
     }
 
 #pragma region Private Methods
 
     void DisplayGFX::SetScreenOrientation(ScreenOrientation orientation)
     {
-        driver->SetRotation(orientation);
-        this->orientation = orientation;
+        driver->SetRotation(orientation);        
     }
 
     void DisplayGFX::DrawHollowCircle(uint16_t X, uint16_t Y, uint16_t radius, uint16_t color)

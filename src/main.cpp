@@ -9,7 +9,6 @@ SPI_HandleTypeDef hspi2;
 DMA_HandleTypeDef hdma_spi2_tx;
 UART_HandleTypeDef huart1;
 
-
 int main(void)
 {
     HAL_Init();
@@ -20,34 +19,18 @@ int main(void)
     Drivers::Usart usart(&huart1);
     LCDScreen::Ili9341 screenDriver(&hspi2);
     LCDScreen::DisplayGFX display(&screenDriver);
-    // ILI9341_Init();
 
     while (1)
     {
         display.RenderLoop();
-        printf("\n\r UART Printf Example %.2f: \n\r", 3.2);
         HAL_Delay(500);
-        // screenDriver.SetRotation(LCDScreen::ScreenOrientation::Horizontal2);
-        // screenDriver.FillScreen(WHITE);
-        // ILI9341_FillScreen(WHITE);
-        // ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
-        // screenDriver.DrawFilledCircle(100, 100, 50, OLIVE);
-        // ILI9341_DrawFilledCircle(100, 100, 50, RED);
-        // ILI9341_DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
-        // HAL_Delay(2000);
-        // ILI9341_FillScreen(WHITE);
+        GPIO_PinState keyLeft = HAL_GPIO_ReadPin(Screen_Key_LEFT_GPIO_Port, Screen_Key_LEFT_Pin);
+        GPIO_PinState keyUp = HAL_GPIO_ReadPin(Screen_Key_UP_GPIO_Port, Screen_Key_UP_Pin);
+        GPIO_PinState keyRight = HAL_GPIO_ReadPin(Screen_Key_RIGHT_GPIO_Port, Screen_Key_RIGHT_Pin);
+        GPIO_PinState keyDown = HAL_GPIO_ReadPin(Screen_Key_DOWN_GPIO_Port, Screen_Key_DOWN_Pin);
+        GPIO_PinState keyCenter = HAL_GPIO_ReadPin(Screen_Key_CENTER_GPIO_Port, Screen_Key_CENTER_Pin);
+        printf("\n\r Left %u Right %u Center %u Down %u Up %u \n\r", keyLeft, keyRight, keyCenter, keyDown, keyUp);
 
-        /* IMAGE EXAMPLE */
-        /*ILI9341_FillScreen(WHITE);
-        ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
-        ILI9341_DrawText("RGB Picture", FONT3, 10, 10, RED, YELLOW);
-        ILI9341_DrawText("TIGER", FONT3, 10, 30, BLACK, WHITE);
-        HAL_Delay(2000);
-        ILI9341_DrawImage(snow_tiger, SCREEN_VERTICAL_2);
-        ILI9341_SetRotation(SCREEN_VERTICAL_1);
-        HAL_Delay(5000);*/
-        // lcdDriver.DrawSomething();
-        // usart.PrintBlocking("Value of One in number is  : %f \r\n", 1.3);
     }
     return 0;
 }
@@ -144,6 +127,7 @@ void MX_GPIO_Init(void)
     __HAL_RCC_GPIOH_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE();
 
     HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
@@ -153,7 +137,16 @@ void MX_GPIO_Init(void)
 
     HAL_GPIO_WritePin(GPIOB, LCD_RESET_Pin | LCD_DCX_Pin, GPIO_PIN_RESET);
 
-    /*Configure GPIO pin : LD2_Pin */
+    GPIO_InitStruct.Pin = Screen_Key_DOWN_Pin | Screen_Key_UP_Pin | Screen_Key_CENTER_Pin | Screen_Key_RIGHT_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = Screen_Key_LEFT_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(Screen_Key_LEFT_GPIO_Port, &GPIO_InitStruct);
+
     GPIO_InitStruct.Pin = LD2_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;

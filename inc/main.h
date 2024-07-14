@@ -24,6 +24,16 @@ extern "C" {
 #define LCD_RESET_GPIO_Port GPIOB
 #define LCD_DCX_Pin GPIO_PIN_9
 #define LCD_DCX_GPIO_Port GPIOB
+#define Screen_Key_UP_Pin GPIO_PIN_10
+#define Screen_Key_UP_GPIO_Port GPIOC
+#define Screen_Key_CENTER_Pin GPIO_PIN_11
+#define Screen_Key_CENTER_GPIO_Port GPIOC
+#define Screen_Key_RIGHT_Pin GPIO_PIN_12
+#define Screen_Key_RIGHT_GPIO_Port GPIOC
+#define Screen_Key_LEFT_Pin GPIO_PIN_2
+#define Screen_Key_LEFT_GPIO_Port GPIOD
+#define Screen_Key_DOWN_Pin GPIO_PIN_13
+#define Screen_Key_DOWN_GPIO_Port GPIOC
 
 void SystemClock_Config(void);
 void Error_Handler(void);

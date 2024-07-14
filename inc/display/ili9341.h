@@ -133,10 +133,12 @@ namespace LCDScreen
         void WriteCommandData(uint8_t *buffer, uint16_t length);
         void DrawColorBurst(uint16_t color, uint32_t size);
         void FillScreen(uint16_t color);
-
+        ScreenOrientation GetRotation();
+        
     private:
         Drivers::Usart *debug;
-        SPI_HandleTypeDef *spi;
+        SPI_HandleTypeDef *spi;              
+        ScreenOrientation screenOrientation;
         void Initialization(void);
         void Enable(void);
         void SelectCommand(Commands command);

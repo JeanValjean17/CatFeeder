@@ -19,5 +19,7 @@
     },
     "C_Cpp.default.compilerPath": "C:/gnu-arm/10 2021.10/bin/arm-none-eabi-g++",
     "cortex-debug.variableUseNaturalFormat": false,
-    "editor.renderWhitespace":"all"
+    "editor.renderWhitespace":"all",
+    "terminal.integrated.profiles.windows":{"Git Bash":{"path":"C:\\Program Files\\Git\\bin\\bash.exe"},  },
+    "terminal.integrated.defaultProfile.windows": "Git Bash"
 }

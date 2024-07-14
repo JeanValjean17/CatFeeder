@@ -39,8 +39,7 @@ namespace LCDScreen
         ~DisplayGFX();
 
     private:
-        Ili9341 *driver;
-        ScreenOrientation orientation;
+        Ili9341 *driver;        
         void SetScreenOrientation(ScreenOrientation orientation);
         void DrawHollowCircle(uint16_t X, uint16_t Y, uint16_t radius, uint16_t color);
         void DrawFilledCircle(uint16_t X, uint16_t Y, uint16_t radius, uint16_t color);
