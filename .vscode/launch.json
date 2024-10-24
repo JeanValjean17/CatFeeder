@@ -6,7 +6,7 @@
     "configurations": [
         {
             "cwd": "${workspaceRoot}",
-            "executable": "./build/bin/CatFeeder.elf",
+            "executable": "./build/CatFeeder.elf",
             "name": "Debug Microcontroller",
             "request": "launch",
             "type": "cortex-debug",
@@ -18,7 +18,7 @@
             "serialNumber": "", // add J-Link serial number if having multiple attached the same time.
             "runToMain": true,
             "svdFile": "${workspaceRoot}/device/stm32l0x3.svd",
-
+            "showDevDebugOutput": "raw"
         }
     ]
 }

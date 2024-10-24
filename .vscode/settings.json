@@ -17,7 +17,8 @@
         "stm32l0xx_hal.c": "cpp",
         "ili9341.h": "c",
         "mpu_armv7.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "algorithm": "cpp"
     },
     "C_Cpp.default.compilerPath": "C:/gnu-arm/13.3rel1/bin/arm-none-eabi-gcc.exe",
     "cortex-debug.variableUseNaturalFormat": false,
