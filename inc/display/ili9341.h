@@ -1,7 +1,7 @@
 #ifndef __ILI9341_H
 #define __ILI9341_H
 
-#include "stdint.h"
+//#include "stdint.h"
 #include "stm32l0xx_hal.h"
 #include "usart.h"
 
@@ -15,7 +15,7 @@ namespace LCDScreen
 #define LCD_RST_PORT GPIOB
 #define LCD_RST_PIN GPIO_PIN_8
 
-    const uint16_t BURST_MAX_SIZE = 500;
+    const uint16_t BURST_MAX_SIZE = 2;
     const uint16_t SCREEN_HEIGHT = 240;
     const uint16_t SCREEN_WIDTH = 320;
 

@@ -1,7 +1,8 @@
 #include "display_gfx.h"
 #include "fonts.h"
+#include "drakengard.h"
 #include "snow_tiger.h"
-
+#include "roksie.h"
 namespace LCDScreen
 {
     __STATIC_INLINE void DelayUs(volatile uint32_t us)
@@ -21,9 +22,11 @@ namespace LCDScreen
 
     void DisplayGFX::RenderLoop()
     {
-        this->SetScreenOrientation(Horizontal2);
-        driver->FillScreen(BLUE);
-        this->DrawText("Test Text", FONT2, 10, 10, BLACK, WHITE);
+        // this->SetScreenOrientation(Vertical2);
+        
+        // driver->FillScreen(WHITE);
+        this->DrawImage(roksie, Vertical2);
+        // this->DrawText("Test Text", FONT2, 10, 10, BLACK, WHITE);
     }
 
 #pragma region Private Methods
@@ -281,7 +284,11 @@ namespace LCDScreen
         uint32_t counter = 0;
         for (uint32_t i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT * 2 / BURST_MAX_SIZE; i++)
         {
-            driver->WriteCommandData((uint8_t *)(image + counter), BURST_MAX_SIZE);
+            uint8_t bufferCopy[2];
+            bufferCopy[0] = (uint8_t)image[counter + 1];
+            bufferCopy[1] = (uint8_t)image[counter];
+            driver->WriteCommandData(bufferCopy, 2);
+            //driver->WriteCommandData((uint8_t *)(image + counter), BURST_MAX_SIZE);
             counter += BURST_MAX_SIZE;
 
             /* DMA Tx is too fast, It needs some delay */

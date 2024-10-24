@@ -10,9 +10,9 @@
                 "USE_HAL_DRIVER",
                 "DEBUG"
             ],
-            "compilerPath": "C:/gnu-arm/10 2021.10/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "C:/gnu-arm/13.3rel1/bin/arm-none-eabi-g++",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++23",
             "intelliSenseMode": "gcc-arm"
         }
     ],

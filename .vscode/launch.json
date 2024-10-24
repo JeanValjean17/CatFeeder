@@ -12,7 +12,7 @@
             "type": "cortex-debug",
             "servertype": "jlink",
             "serverpath": "C:/Program Files/SEGGER/JLink_V796g/JLinkGDBServerCL.exe",
-            "armToolchainPath": "C:/gnu-arm/10 2021.10/bin",
+            "armToolchainPath": "C:/gnu-arm/13.3rel1/bin",
             "device": "STM32L073RZ",
             "interface": "swd",
             "serialNumber": "", // add J-Link serial number if having multiple attached the same time.

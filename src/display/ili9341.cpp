@@ -1,15 +1,14 @@
 #include "ili9341.h"
-
+#include "stdlib.h"
 namespace LCDScreen
 {
 
     Ili9341::Ili9341(SPI_HandleTypeDef *hspi2) : spi(hspi2)
     {
-
+        printf("Initializing Screen Driver");
         // usart->PrintBlocking("Initializing screen driver\r\n");
 
         this->Initialization();
-        // usart->PrintBlocking("FiNISHED Initializing screen driver\r\n");
     }
 
     void Ili9341::SetRotation(ScreenOrientation rot)
@@ -45,10 +44,10 @@ namespace LCDScreen
 
     void Ili9341::FillScreen(uint16_t color)
     {
-        if (this->screenOrientation == ScreenOrientation::Horizontal || this->screenOrientation == ScreenOrientation::Horizontal2)        
-            this->SetAddress(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
-        else if (this->screenOrientation == ScreenOrientation::Vertical || this->screenOrientation == ScreenOrientation::Vertical2)
+        if (this->screenOrientation == ScreenOrientation::Horizontal || this->screenOrientation == ScreenOrientation::Horizontal2)
             this->SetAddress(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        else if (this->screenOrientation == ScreenOrientation::Vertical || this->screenOrientation == ScreenOrientation::Vertical2)
+            this->SetAddress(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH);
         this->DrawColorBurst(color, SCREEN_WIDTH * SCREEN_HEIGHT);
     }
 
@@ -188,7 +187,7 @@ namespace LCDScreen
         this->WriteCommandData(0x86);
 
         this->SelectCommand(Commands::MemoryAccessControl);
-        this->WriteCommandData(0x48);
+        this->WriteCommandData(0x40);
 
         this->SelectCommand(Commands::PixelFormatSet);
         this->WriteCommandData(0x55);
@@ -207,6 +206,11 @@ namespace LCDScreen
 
         this->SelectCommand(Commands::GammaSet);
         this->WriteCommandData(0x01);
+
+        this->SelectCommand(Commands::InterfaceControl);
+        this->WriteCommandData(0x00);
+        this->WriteCommandData(0x10);
+        this->WriteCommandData(0x00);
 
         this->SelectCommand(Commands::PositiveGammaCorrection);
         this->WriteCommandData(0x0F);

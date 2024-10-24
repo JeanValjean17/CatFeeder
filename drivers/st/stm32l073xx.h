@@ -7844,7 +7844,3 @@ typedef struct
 #endif /* __cplusplus */
 
 #endif /* __STM32L073xx_H */
-
-
-
-

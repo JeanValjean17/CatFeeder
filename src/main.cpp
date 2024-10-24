@@ -139,12 +139,12 @@ void MX_GPIO_Init(void)
 
     GPIO_InitStruct.Pin = Screen_Key_DOWN_Pin | Screen_Key_UP_Pin | Screen_Key_CENTER_Pin | Screen_Key_RIGHT_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = Screen_Key_LEFT_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(Screen_Key_LEFT_GPIO_Port, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = LD2_Pin;
