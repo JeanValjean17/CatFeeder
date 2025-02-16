@@ -4,6 +4,7 @@
 #include "ili9341.h"
 #include "display_gfx.h"
 #include "stdio.h"
+#include "gpio.h"
 
 SPI_HandleTypeDef hspi2;
 DMA_HandleTypeDef hdma_spi2_tx;
@@ -20,17 +21,25 @@ int main(void)
     LCDScreen::Ili9341 screenDriver(&hspi2);
     LCDScreen::DisplayGFX display(&screenDriver);
 
+    // auto led_pin = gpio::pin<gpio::pins::gpio0>();
+    // led_pin.configure({
+    //     .mode = gpio::pin_mode::output,
+    //     .port = gpio::ports::porta,
+    //     .out_type = gpio::output_type::open_drain,
+    //     .pull_mode = gpio::pull_mode::none
+    // });
+    // led_pin.set_output(gpio::pin_state::high);
+
     while (1)
     {
-        display.RenderLoop();
-        HAL_Delay(500);
+        // display.RenderLoop();
+        HAL_Delay(150);
         GPIO_PinState keyLeft = HAL_GPIO_ReadPin(Screen_Key_LEFT_GPIO_Port, Screen_Key_LEFT_Pin);
         GPIO_PinState keyUp = HAL_GPIO_ReadPin(Screen_Key_UP_GPIO_Port, Screen_Key_UP_Pin);
         GPIO_PinState keyRight = HAL_GPIO_ReadPin(Screen_Key_RIGHT_GPIO_Port, Screen_Key_RIGHT_Pin);
         GPIO_PinState keyDown = HAL_GPIO_ReadPin(Screen_Key_DOWN_GPIO_Port, Screen_Key_DOWN_Pin);
         GPIO_PinState keyCenter = HAL_GPIO_ReadPin(Screen_Key_CENTER_GPIO_Port, Screen_Key_CENTER_Pin);
         printf("\n\r Left %u Right %u Center %u Down %u Up %u \n\r", keyLeft, keyRight, keyCenter, keyDown, keyUp);
-
     }
     return 0;
 }

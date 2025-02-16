@@ -3,7 +3,8 @@
         {
             "name": "CrossARM",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/drivers/st"
             ],
             "defines": [
                 "STM32L073xx",
